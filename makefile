@@ -8,7 +8,7 @@ parse.o: parse.c parse.h
 	gcc -c parse.c
 
 run:
-	./shell "ls -a -l"
+	./shell "echo for forks sakes"
 
 clean:
 	rm *.o
