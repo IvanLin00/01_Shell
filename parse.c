@@ -14,3 +14,14 @@ char ** parse_args(char * line){
 	}
 	return tokens;
 }
+
+int count_semi(char ** commands){
+	int count = 0;
+	int i;
+	for(i = 0; !(commands[i] == NULL); i ++){
+		if (!strncmp(";",commands[i],100)){
+			count ++;
+		}
+	}
+	return count;
+}

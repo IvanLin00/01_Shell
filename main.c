@@ -21,6 +21,21 @@ int main(int argc, char *argv[]){
   if(!ffs){
     execvp(args[0], args);
   }
-
+  int num_children = 1 + count_semi(args);
+  for(int num_forks = 0; num_forks < num_children; num_forks++){
+    int p = fork();
+    if(!p) break;
+  }
+  execvp(args[0], args);
+  printf("hi\n");
   return 0;
 }
+
+//cd, exit, ;, redirection, pipes
+//implement infinite loop
+
+//parse by semi colon
+//count how many there are
+//parse by space for each thing in array
+//make children (o-o)
+//run commands :)
