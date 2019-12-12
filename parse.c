@@ -15,7 +15,18 @@ char ** parse_args(char * line){
 	return tokens;
 }
 
-int count_semi(char ** commands){
+// char ** parse_args(char * line, char * parse){
+	// char *curr = line;
+	// char **tokens = malloc(5 * sizeof(char *));
+	// int i = 0;
+	// while(curr){
+		// tokens[i] = strsep(&curr, parse);
+		// i++;
+	// }
+	// return tokens;
+// }
+
+/* int count_semi(char ** commands){
 	int count = 0;
 	int i;
 	for(i = 0; !(commands[i] == NULL); i ++){
@@ -24,4 +35,4 @@ int count_semi(char ** commands){
 		}
 	}
 	return count;
-}
+} */
