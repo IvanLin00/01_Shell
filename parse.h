@@ -1,2 +1,1 @@
-char ** parse_args(char * line);
-int count_semi(char ** commands);
+char ** parse_args(char * line, char * parse);
