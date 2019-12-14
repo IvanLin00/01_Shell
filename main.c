@@ -10,19 +10,16 @@ int main(int argc, char *argv[]){
   while(1){
 		printf("$");
 	  char commandline[100];
-		for(int commandlineindex = 0; commandlineindex < sizeof(commandline); commandlineindex++){
-			if(!strcmp(commandline[commandlineindex], "\n"))
-				commandline[commandlineindex] = "";
-		}
 	  fgets(commandline, 100, stdin);
-	  char **args = parse_args(commandline, ";");
+    //commandline[sizeof(commandline)] = NULL;
+	  char **args = parse_args(commandline, "\n");
 		int num_children = 1;
 	  for(int i = 0; !(args[i] == NULL); i++){
 	 	num_children ++;
 	  }
 	// //not sure about order --> fork first or check for cd/exit first
 	  char **cargs = parse_args(commandline, " ");
- 		if (!strncmp(cargs[0], "exit", 100)){
+ 		if (!strncmp(cargs[0], "exit\n", 100)){
 			exit(0);
 		}
 		// if (!strncmp(cargs[0], "cd", 100)){
