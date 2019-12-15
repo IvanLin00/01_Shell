@@ -12,17 +12,21 @@ int main(int argc, char *argv[]){
 	  char commandline[100];
 	  fgets(commandline, 100, stdin);
     char **targs = parse_args(commandline, "\n");
+    printf("targs 0: [%s]\n", targs[0]);
 	  char **args = parse_args(targs[0], ";");
-    printf("%s\n", targs[0]);
+    printf("args 0: [%s]\n", args[0]);
 		int num_children = 0;
 	  for(int i = 0; !(args[i] == NULL); i++){
 	 	  num_children ++;
-      printf("%d\n",num_children );
 	  }
     for(int i = 0;i < num_children; i++){
       char **cargs = parse_args(args[i], " ");
+      printf("cargs: [|%s|]\n",cargs[1]);
       if (!strncmp(cargs[0], "exit", 100)){
         exit(0);
+      }
+      if (!strncmp(cargs[0], "cd", 100)){
+        chdir(cargs[1]);
       }
       int ffs = fork();
   		int *status;
