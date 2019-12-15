@@ -11,29 +11,44 @@ int main(int argc, char *argv[]){
 		printf("$");
 	  char commandline[100];
 	  fgets(commandline, 100, stdin);
-    //commandline[sizeof(commandline)] = NULL;
-	  char **args = parse_args(commandline, "\n");
-		int num_children = 1;
-	  for(int i = 0; !(args[i] == NULL); i++){
-	 	num_children ++;
-	  }
-	// //not sure about order --> fork first or check for cd/exit first
-	  char **cargs = parse_args(commandline, " ");
- 		if (!strncmp(cargs[0], "exit\n", 100)){
+    char **targs = parse_args(commandline, "\n");
+	  char **args = parse_args(commandline, ";");
+    char **cargs = parse_args(commandline, " ");
+ 		if (!strncmp(cargs[0], "exit", 100)){
 			exit(0);
 		}
+		int num_children = 1;
+	  for(int i = 0; !(args[i] == NULL); i++){
+      printf("%s\n",args[i]);
+      printf("%d\n",num_children );
+	 	  num_children ++;
+	  }
+    for(;num_children > 0; num_children--){
+      printf("%d\n",num_children );
+      int ffs = fork();
+  		int *status;
+  		wait(status);
+  		if(!ffs){
+  		  execvp(cargs[0], cargs);
+  		}
+    }
+	// //not sure about order --> fork first or check for cd/exit first
+	  // char **cargs = parse_args(commandline, " ");
+ 		// if (!strncmp(cargs[0], "exit", 100)){
+		// 	exit(0);
+		// }
 		// if (!strncmp(cargs[0], "cd", 100)){
 		//   printf("%s\n",*cargs);
 		//   int stuff = chdir(cargs[1]);
 		//   printf("error number: %d %s\n", errno, strerror(errno));
 		//   return 0;
 		// }
-		int ffs = fork();
-		int *status;
-		wait(status);
-		if(!ffs){
-		  execvp(cargs[0], cargs);
-		}
+		// int ffs = fork();
+		// int *status;
+		// wait(status);
+		// if(!ffs){
+		//   execvp(cargs[0], cargs);
+		// }
   }
 }
 
