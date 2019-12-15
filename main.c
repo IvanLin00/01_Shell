@@ -13,18 +13,17 @@ int main(int argc, char *argv[]){
 	  fgets(commandline, 100, stdin);
     char **targs = parse_args(commandline, "\n");
 	  char **args = parse_args(targs[0], ";");
-		int num_children = 1;
+    printf("%s\n", targs[0]);
+		int num_children = 0;
 	  for(int i = 0; !(args[i] == NULL); i++){
-      //printf("%s\n",args[i]);
-      //printf("%d\n",num_children );
 	 	  num_children ++;
+      printf("%d\n",num_children );
 	  }
     for(int i = 0;i < num_children; i++){
       char **cargs = parse_args(args[i], " ");
       if (!strncmp(cargs[0], "exit", 100)){
         exit(0);
       }
-      //printf("%d\n",num_children );
       int ffs = fork();
   		int *status;
   		wait(status);
