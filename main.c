@@ -6,6 +6,7 @@
 #include <errno.h>
 #include "parse.h"
 #include "redirection.h"
+#include "pipes.h"
 
 int main(int argc, char *argv[]){
   while(1){
@@ -19,6 +20,9 @@ int main(int argc, char *argv[]){
          run_in(args[i]);
        if(redir(commandline) == 2)
          run_out(args[i]);
+       if(pipes_needed(commandline))
+         //mario(commandline);
+         printf("mario messed up\n");
        else{
          char **cargs = parse_args(args[i], " ");
          if (!strncmp(cargs[0], "exit", 100)){
