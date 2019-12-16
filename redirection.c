@@ -30,6 +30,7 @@ void run_out (char * command){
   char ** args = parse_args(b[0], " ");
   char ** file_name = parse_args(commands[1], " ");
   int fd = open(*file_name, O_CREAT|O_EXCL|O_RDONLY|O_TRUNC, 0755);
+  printf("%s\n", *file_name);
   int f = fork();
   if(!f){
     dup2(fd, STDIN_FILENO);
