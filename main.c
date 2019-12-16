@@ -22,8 +22,10 @@ int main(int argc, char *argv[]){
 	  char **args = parse_args(targs[0], ";");
 		int num_children = 0;
 	  for(int i = 0; !(args[i] == NULL); i++){
-	 	   if(redir(commandline) == 1) run_in(args[i]);
-       if(redir(commandline) == 2) run_out(args[i]);
+	 	   if(redir(commandline) == 1)
+        run_in(args[i]);
+       if(redir(commandline) == 2) 
+        run_out(args[i]);
        else{
          char **cargs = parse_args(args[i], " ");
          if (!strncmp(cargs[0], "exit", 100)){
