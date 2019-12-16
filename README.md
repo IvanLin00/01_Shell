@@ -6,7 +6,7 @@ by Ivan Lin and Jimmy Luo
 Features:
   + Forks and executes commands
   + Runs multiple commands using ;
-  + Redirects using <
+  + Redirects using >
 
 Attempted:
   + Pipes do not work
@@ -15,6 +15,8 @@ Attempted:
 Bugs:
   + Putting spaces in when using ; will not work (No spaces between commands and semicolons)
    + Example: ls;ps works but ls ; ps doesn't work
+  + Putting spaces in when using > will not work (No spaces between commands and >)
+   + Example: w>wholist works but w > wholist doesn't work
   + Exit sometimes doesn't work when multiple commands are run
   + The file created after redirection has to be removed
 
