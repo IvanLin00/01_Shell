@@ -13,19 +13,13 @@ int main(int argc, char *argv[]){
 	  char commandline[100];
 	  fgets(commandline, 100, stdin);
     char **targs = parse_args(commandline, "\n");
-    if(redir(commandline) == 1){
-      char **rargs = parse_args(commandline, ">");
-    }
-    if(redir(commandline) == 2){
-      char **rargs = parse_args(commandline, ">");
-    }
 	  char **args = parse_args(targs[0], ";");
 		int num_children = 0;
 	  for(int i = 0; !(args[i] == NULL); i++){
 	 	   if(redir(commandline) == 1)
-        run_in(args[i]);
-       if(redir(commandline) == 2) 
-        run_out(args[i]);
+         run_in(args[i]);
+       if(redir(commandline) == 2)
+         run_out(args[i]);
        else{
          char **cargs = parse_args(args[i], " ");
          if (!strncmp(cargs[0], "exit", 100)){
@@ -37,9 +31,9 @@ int main(int argc, char *argv[]){
          int ffs = fork();
          int *status;
          wait(status);
-         if(!ffs) execvp(cargs[0], cargs);
-
-       }
+         if(!ffs)
+          execvp(cargs[0], cargs);
+      }
 	  }
   }
 }

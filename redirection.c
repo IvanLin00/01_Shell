@@ -40,11 +40,11 @@ void run_out (char * command){
 }
 
 int redir(char * commandline){
-  for(int i = 0; i < sizeof(commandline); i++){
-    if(commandline[i] == '>')
-      return 1;
-    if(commandline[i] == '<')
-      return 2;
+  if(strchr(commandline, '>')){
+    return 1;
+  }
+  if(strchr(commandline, '<')){
+    return 2;
   }
   return 0;
 }
