@@ -10,21 +10,6 @@
 #include "redirection.h"
 
 void run_in (char * command){
-  char ** commands = parse_args(command, "<");
-  char ** b = parse_args(commands[0], " ");
-  char ** args = parse_args(b[0], " ");
-  char ** file_name = parse_args(commands[1], " ");
-  int fd = open(*file_name, O_CREAT|O_EXCL|O_WRONLY|O_TRUNC, 0755);
-  int f = fork();
-  if(!f){
-    dup2(fd, STDIN_FILENO);
-    execvp(args[0], args);
-    exit(0);
-  }
-  close(fd);
-}
-
-void run_out (char * command){
   char ** commands = parse_args(command, ">");
   char ** b = parse_args(commands[0], " ");
   char ** args = parse_args(b[0], " ");
@@ -33,6 +18,21 @@ void run_out (char * command){
   int f = fork();
   if(!f){
     dup2(fd, STDOUT_FILENO);
+    execvp(args[0], args);
+    exit(0);
+  }
+  close(fd);
+}
+
+void run_out (char * command){
+  char ** commands = parse_args(command, "<");
+  char ** b = parse_args(commands[0], " ");
+  char ** args = parse_args(b[0], " ");
+  char ** file_name = parse_args(commands[1], " ");
+  int fd = open(*file_name, O_CREAT|O_EXCL|O_RDONLY|O_TRUNC, 0755);
+  int f = fork();
+  if(!f){
+    dup2(fd, STDIN_FILENO);
     execvp(args[0], args);
     exit(0);
   }

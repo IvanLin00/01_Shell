@@ -14,7 +14,6 @@ int main(int argc, char *argv[]){
 	  fgets(commandline, 100, stdin);
     char **targs = parse_args(commandline, "\n");
 	  char **args = parse_args(targs[0], ";");
-		int num_children = 0;
 	  for(int i = 0; !(args[i] == NULL); i++){
 	 	   if(redir(commandline) == 1)
          run_in(args[i]);
@@ -38,4 +37,4 @@ int main(int argc, char *argv[]){
   }
 }
 
-//;, redirection, pipes
+//redirection, pipes
